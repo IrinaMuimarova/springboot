@@ -1,6 +1,7 @@
 package springBoot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
 
     @Autowired
@@ -45,16 +47,16 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/update")
-    public String showFormForUpdate(@RequestParam("userId") Integer id,
+    @GetMapping("/update/{id}")
+    public String showFormForUpdate(@PathVariable("id") Integer id,
                                     Model model) {
         model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("roles", roleService.getRoles());
         return "admin/formUser";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("userId") Integer id) {
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }

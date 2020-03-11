@@ -36,7 +36,7 @@ public class UserServiceImp implements UserService {
     @Transactional(readOnly = true)
     @Override
     public User getUserById(Integer id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
     }
 
     @Override
