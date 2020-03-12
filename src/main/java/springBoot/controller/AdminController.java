@@ -26,39 +26,16 @@ public class AdminController {
     @Autowired
     RoleService roleService;
 
-    @GetMapping
-    public String getUser(Model model) {
-        List<User> users = userService.getAllUser();
-        model.addAttribute("users", users);
-        return "admin/list";
-    }
-
-    @GetMapping("/add")
-    public String showFormForAdd(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roleService.getRoles());
-        return "admin/formUser";
-    }
-
     @PostMapping("/saveUser")
     public String saveCustomer(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("/update/{id}")
-    public String showFormForUpdate(@PathVariable("id") Integer id,
-                                    Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("roles", roleService.getRoles());
-        return "admin/formUser";
+        return "redirect:/";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
-        return "redirect:/admin";
+        return "redirect:/";
     }
 
     @InitBinder                                         //запускаеи блок initBinder для обработки списка прав

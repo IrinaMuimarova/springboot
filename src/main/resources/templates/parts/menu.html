@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+<div th:fragment="menu">
+    <nav class="side navbar navbar-default">
+        <ul class="nav nav-pills">
+            <li sec:authorize="hasAuthority('ADMIN')" class="active">
+                <a style="width: 187px" data-toggle="pill" href="#adminPanel">Admin</a>
+            </li>
+            <li>
+                <a style="width: 187px" data-toggle="pill" href="#userCard">User</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

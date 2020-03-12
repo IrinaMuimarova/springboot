@@ -51,8 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
                 // даем доступ к форме логина всем
                 .permitAll();
 
-        http.exceptionHandling().accessDeniedPage("/notAccess");
-
         http.logout()
                 // разрешаем делать логаут всем
                 .permitAll()
@@ -65,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
 
         http
                 .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+                    .antMatchers("/resources/**").permitAll()
+                    .antMatchers("/css/**").permitAll()
+                    .antMatchers("/js/**").permitAll()
                 .antMatchers("/login").anonymous()
                 .anyRequest().authenticated();
     }
