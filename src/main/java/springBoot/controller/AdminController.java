@@ -41,13 +41,13 @@ public class AdminController {
     @PostMapping("/saveUser")
     public String saveCustomer(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @InitBinder                                         //запускаеи блок initBinder для обработки списка прав
