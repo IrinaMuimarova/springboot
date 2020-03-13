@@ -12,7 +12,6 @@ import springBoot.service.UserService;
 
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAuthority('USER')")
 public class UserController {
 
     @Autowired
@@ -21,7 +20,7 @@ public class UserController {
     @GetMapping
     public String userCard(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute(user);
-        return "user/userCard";
+        model.addAttribute("userCurent", user);
+        return "user";
     }
 }

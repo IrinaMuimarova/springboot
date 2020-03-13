@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:include="~{parts/header :: head}"></div>
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+<div th:include="~{parts/header :: navbar}"></div>
+<div class="row">
+    <div th:include="~{parts/menu :: menu}"></div>
+    <div class="main">
+                <div th:include="~{parts/userCard :: card}"></div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="js/edit.js"></script>
+</body>
+</html>

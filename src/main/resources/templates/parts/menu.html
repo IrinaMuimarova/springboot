@@ -9,14 +9,18 @@
 <body>
 <div th:fragment="menu">
     <nav class="side navbar navbar-default">
-        <ul class="nav nav-pills">
-            <li sec:authorize="hasAuthority('ADMIN')" class="active">
-                <a style="width: 187px" data-toggle="pill" href="#adminPanel">Admin</a>
-            </li>
-            <li>
-                <a style="width: 187px" data-toggle="pill" href="#userCard">User</a>
-            </li>
-        </ul>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <ul class="nav nav-item">
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a style="width: 185px" class="nav-link btn-outline-primary active" data-toggle="tab" role="button" aria-pressed="true"
+                       th:href="@{/admin}" href="/admin">Admin</a>
+                </li>
+                <li>
+                    <a style="width: 185px" class="button btn-outline-primary" data-toggle="tab" role="button" aria-pressed="true"
+                       th:href="@{/user}" href="/user">User</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </div>
 </body>

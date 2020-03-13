@@ -2,6 +2,7 @@ package springBoot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,6 +26,17 @@ public class AdminController {
 
     @Autowired
     RoleService roleService;
+
+    @GetMapping
+    public String common(Model model){
+        List<User> users = userService.getAllUser();
+        model.addAttribute("users", users);
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", roleService.getRoles());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("userCurent", user);
+        return "common";
+    }
 
     @PostMapping("/saveUser")
     public String saveCustomer(@ModelAttribute("user") User user) {

@@ -26,14 +26,5 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping
-    public String common(Model model){
-        List<User> users = userService.getAllUser();
-        model.addAttribute("users", users);
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", roleService.getRoles());
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("userCurent", user);
-        return "common";
-    }
+
 }
