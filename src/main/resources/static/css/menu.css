@@ -11,22 +11,29 @@ body {
 
 /* Column container */
 .row {
+    position: page;
     display: flex;
-    flex-wrap: wrap;
+    padding-top: 65px;
+    width: 95%;
 }
 
 /* Create two unequal columns that sits next to each other */
 /* Sidebar/left column */
 .side {
-    flex-direction: row;
+    flex: 15%;
     width: 200px;
-    height: 85vmin;
+    height: 100%;
     background-color: white;
-    align-content: start;
+    align-content: flex-start;
+    position: fixed;
+    bottom: -82px;
 }
 
 /* Main column */
 .main {
-    flex: 70%;
-    padding: 20px;
+    flex: 90%;
+    width: 90%;
+    padding-left: 250px;
+    align-content: center;
+    justify-content: center;
 }

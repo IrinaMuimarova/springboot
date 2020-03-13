@@ -9,18 +9,16 @@
 <body>
 <div th:fragment="menu">
     <nav class="side navbar navbar-default">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <ul class="nav nav-item">
-                <li sec:authorize="hasAuthority('ADMIN')">
-                    <a style="width: 189px" class="nav-link btn-outline-primary active" data-toggle="tab" role="button" aria-pressed="true"
-                       th:href="@{/admin}" href="/admin">Admin</a>
-                </li>
-                <li>
-                    <a style="width: 187px" class="button btn-outline-primary" data-toggle="tab" role="button" aria-pressed="true"
-                       th:href="@{/user}" href="/user">User</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="nav nav-item">
+            <li sec:authorize="hasAuthority('ADMIN')">
+                <a style="width: 189px" class="btn btn-outline-primary" role="button" aria-pressed="true"
+                   th:href="@{/admin}" href="#">Admin</a>
+            </li>
+            <li>
+                <a style="width: 187px" class="btn btn-outline-primary" role="button" aria-pressed="true"
+                   th:href="@{/user}" href="#">User</a>
+            </li>
+        </ul>
     </nav>
 </div>
 </body>

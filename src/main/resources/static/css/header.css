@@ -1,12 +1,11 @@
 .flex-container {
     display: flex;
-    flex-direction: row;
-    background: #494949;
-    flex-wrap: nowrap;
+    background: #3b3b3b;
     padding: 0 10px;
-}
-
-.flex-container > a {
-    align-self: flex-end;
-    margin-left: auto;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
 }
