@@ -14,7 +14,7 @@ body {
     position: page;
     display: flex;
     padding-top: 65px;
-    width: 95%;
+    /*width: 95%;*/
 }
 
 /* Create two unequal columns that sits next to each other */
@@ -26,7 +26,6 @@ body {
     background-color: white;
     align-content: flex-start;
     position: fixed;
-    bottom: -82px;
 }
 
 /* Main column */

@@ -25,8 +25,8 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "enables")
-    private Boolean enables;
+    @Column(name = "enable")
+    private Boolean enable;
 
     @ManyToMany(cascade=CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinTable(
@@ -79,11 +79,11 @@ public class User implements UserDetails {
     }
 
     public Boolean isEnables() {
-        return enables;
+        return enable;
     }
 
-    public void setEnables(Boolean enables) {
-        this.enables = enables;
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 
     @Override
