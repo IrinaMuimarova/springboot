@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springBoot.repository.UserRepository;
 import springBoot.model.User;
+import springBoot.rest.UserNotFoundException;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class UserServiceImp implements UserService {
     @Transactional(readOnly = true)
     @Override
     public User getUserById(Integer id) {
-        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User id not found - " + id));
     }
 
     @Override
