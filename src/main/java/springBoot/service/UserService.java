@@ -9,10 +9,12 @@ public interface UserService {
 
     void saveUser(User user);
 
-    void deleteUser(Integer id);
+    void deleteUser(Long id);
 
-    User getUserById(Integer id);
+    User getUserById(Long id);
 
     User getUserByLogin(String login);
+
+    void existUser(Long id);
 
 }

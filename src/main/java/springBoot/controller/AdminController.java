@@ -45,7 +45,7 @@ public class AdminController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
+    public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
@@ -55,7 +55,7 @@ public class AdminController {
         binder.registerCustomEditor(Role.class, "roles", new PropertyEditorSupport() {          //переводим String id в Role
             @Override
             public void setAsText(String text) {
-                setValue(roleService.getRoleById(new Integer(text)));
+                setValue(roleService.getRoleById(new Long(text)));
             }
         });
     }

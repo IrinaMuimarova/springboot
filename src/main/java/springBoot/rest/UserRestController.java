@@ -27,7 +27,7 @@ public class UserRestController {
     // add mapping for GET /users/{userID}
 
     @GetMapping("/users/{userId}")
-    public  ResponseEntity<User> getUser(@PathVariable int userId) {
+    public  ResponseEntity<User> getUser(@PathVariable Long userId) {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
 
@@ -42,12 +42,13 @@ public class UserRestController {
     // add mapping for PUT /users - update existing user
     @PutMapping("/users")
     public  ResponseEntity<User> updateUser(@RequestBody User theUser) {
+        userService.existUser(theUser.getId());
         userService.saveUser(theUser);
         return new  ResponseEntity<>(theUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{userId}")
-    public  ResponseEntity<String> deleteUser(@PathVariable int userId){
+    public  ResponseEntity<String> deleteUser(@PathVariable Long userId){
         userService.getUserById(userId);
         userService.deleteUser(userId);
         return new  ResponseEntity<>("Delete user id - " + userId, HttpStatus.OK);

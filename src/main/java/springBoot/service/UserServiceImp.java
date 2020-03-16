@@ -28,8 +28,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Transactional
+    public void existUser(Long id){
+        if (!userRepository.existsById(id)){
+            throw new UserNotFoundException("User id not found - " + id);
+        }
+    }
+
+    @Transactional
     @Override
-    public void deleteUser(Integer id) {
+    public void deleteUser(Long id) {
+       existUser(id);
         userRepository.deleteById(id);
     }
 
@@ -41,7 +49,7 @@ public class UserServiceImp implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public User getUserById(Integer id) {
+    public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User id not found - " + id));
     }
 
