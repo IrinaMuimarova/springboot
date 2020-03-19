@@ -1,6 +1,7 @@
 package springBoot.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,9 @@ public class UserRestController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
-        return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
+       ResponseEntity<List<User>> responseEntity = new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
+        System.out.println(responseEntity);
+        return responseEntity;
     }
 
     // add mapping for GET /users/{userID}
@@ -49,7 +52,7 @@ public class UserRestController {
 
     @DeleteMapping("/users/{userId}")
     public  ResponseEntity<String> deleteUser(@PathVariable Long userId){
-        userService.getUserById(userId);
+        userService.existUser(userId);
         userService.deleteUser(userId);
         return new  ResponseEntity<>("Delete user id - " + userId, HttpStatus.OK);
     }
