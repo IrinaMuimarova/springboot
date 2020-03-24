@@ -9,10 +9,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -53,6 +53,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {              //кастомизация работы с http запросыми
+        http
+
+                .authorizeRequests()
+                .antMatchers("/api/**").authenticated()
+                .and()
+                .httpBasic().authenticationEntryPoint(authEntryPoint)
+                .and()
+                .cors().configurationSource(corsConfigurationSource())
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http.formLogin()
                 // указываем страницу с формой логина
                 .loginPage("/login")
@@ -77,34 +87,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  // WebSecuri
                 .and().csrf().disable();
 
         http
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
-                .httpBasic()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/api/**").hasAuthority("ADMIN")
-                .and()
-                .csrf().disable()
-                .formLogin().disable();
-        http
                 .authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-//                    .antMatchers("/api/**").permitAll()
-                .antMatchers("/login").anonymous()
+                //         .antMatchers("/css/**").permitAll()
+                //       .antMatchers("/js/**").permitAll()
+                // .antMatchers("/login").anonymous()
                 .anyRequest().authenticated();
+
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
         configuration.setAllowCredentials(true);
-        //the below three lines will add the relevant CORS response headers
         configuration.addAllowedOrigin("*");
-        configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
