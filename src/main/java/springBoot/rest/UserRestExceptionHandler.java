@@ -16,9 +16,9 @@ public class UserRestExceptionHandler {
         // create UserErrorResponse
 
         UserErrorResponse error = new UserErrorResponse(
-                                        HttpStatus.NOT_FOUND.value(),
-                                        exc.getMessage(),
-                                        System.currentTimeMillis());
+                HttpStatus.NOT_FOUND.value(),
+                exc.getMessage(),
+                System.currentTimeMillis());
         //return ResponseEntity
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }

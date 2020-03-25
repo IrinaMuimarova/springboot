@@ -1,14 +1,11 @@
 package springBoot.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,13 +31,6 @@ public class Role implements GrantedAuthority {
     public Long getId() {
         return id;
     }
-
-    @Override
-    @JsonIgnore
-    public String getAuthority() {
-        return name;
-    }
-
 
     @Override
     public boolean equals(Object o) {

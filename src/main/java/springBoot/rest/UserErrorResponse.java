@@ -6,7 +6,7 @@ public class UserErrorResponse {
     private String message;
     private long timeStamp;
 
-    public UserErrorResponse(){
+    public UserErrorResponse() {
 
     }
 
